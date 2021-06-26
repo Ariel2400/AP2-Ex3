@@ -3,8 +3,6 @@ package com.example.ap2_ex3.view;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -12,19 +10,22 @@ import android.widget.EditText;
 import android.widget.SeekBar;
 
 import com.example.ap2_ex3.R;
+import com.example.ap2_ex3.viewModel.ViewModel;
 import com.example.ap2_ex3.views.Joystick;
 
 public class MainActivity extends AppCompatActivity implements Joystick.JoystickListener {
 
-    SeekBar sbThrottle, sbAileron;
+    SeekBar sbThrottle, sbRudder;
     Button bConnect;
     EditText etIp, etPort;
+    ViewModel viewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        sbAileron = (SeekBar)findViewById(R.id.sbAileron);
+        viewModel = new ViewModel();
+        sbRudder = (SeekBar)findViewById(R.id.sbRudder);
         etIp = (EditText)findViewById(R.id.etIp);
         etPort = (EditText)findViewById(R.id.etPort);
         sbThrottle = (SeekBar)findViewById(R.id.sbThrottle) ;
@@ -32,13 +33,13 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
         bConnect.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Log.d("bConnect", "Pressed");
+                viewModel.connect();
             }
         });
         sbThrottle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d("Throttle", "Progress: "+progress);
+                viewModel.setThrottle();
             }
 
             @Override
@@ -51,10 +52,10 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
 
             }
         });
-        sbAileron.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+        sbRudder.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                Log.d("Aileron", "Progress: "+progress);
+               viewModel.setRudder();
             }
 
             @Override
@@ -71,7 +72,8 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
 
     @Override
     public void onJoystickMoved(float d_x, float d_y, int source) {
-        Log.d("Joystick", "X pos: "+d_x+", Y pos: "+d_y);
+        viewModel.setAileron();
+        viewModel.setElevator();
     }
 
 
