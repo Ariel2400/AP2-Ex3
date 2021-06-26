@@ -20,11 +20,11 @@ public class ViewModel {
     }
 
     public float getRudder() {
-        return rudder;
+        return (rudder-50)/100;
     }
 
     public float getThrottle() {
-        return throttle;
+        return throttle/100;
     }
 
     public float getAileron() {
