@@ -118,6 +118,7 @@ public class Joystick extends SurfaceView implements SurfaceHolder.Callback, Vie
         return true;
     }
 
+
     public interface JoystickListener{
         void onJoystickMoved(float d_x, float d_y, int source);
     }

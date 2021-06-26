@@ -1,5 +1,7 @@
 package com.example.ap2_ex3.model;
 
+import android.util.Log;
+
 import com.example.ap2_ex3.viewModel.ViewModel;
 
 import java.io.IOException;
@@ -39,6 +41,7 @@ public class Model {
     }
 
     public void setThrottle() throws InterruptedException {
+        Log.d("Throttle", String.valueOf(mViewModel.throttle));
         dispatchQueue.put(() -> out.print("set /controls/engines/current-engine/throttle" + mViewModel.getThrottle()));
     }
 
