@@ -1,6 +1,8 @@
 package com.example.ap2_ex3.view;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.databinding.DataBindingUtil;
+import androidx.databinding.ViewDataBinding;
 
 import android.os.Bundle;
 import android.util.Log;
@@ -25,6 +27,8 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         viewModel = new ViewModel();
+        ViewDataBinding binding = DataBindingUtil.setContentView(this, R.layout.activity_main);
+
         sbRudder = (SeekBar)findViewById(R.id.sbRudder);
         etIp = (EditText)findViewById(R.id.etIp);
         etPort = (EditText)findViewById(R.id.etPort);
@@ -39,7 +43,8 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
         sbThrottle.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                viewModel.setThrottle();
+
+                viewModel.setThrottle(progress);
             }
 
             @Override
@@ -55,7 +60,7 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
         sbRudder.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-               viewModel.setRudder();
+               viewModel.setRudder(progress);
             }
 
             @Override
@@ -72,8 +77,8 @@ public class MainActivity extends AppCompatActivity implements Joystick.Joystick
 
     @Override
     public void onJoystickMoved(float d_x, float d_y, int source) {
-        viewModel.setAileron();
-        viewModel.setElevator();
+        viewModel.setAileron(d_x);
+        viewModel.setElevator(d_y);
     }
 
 

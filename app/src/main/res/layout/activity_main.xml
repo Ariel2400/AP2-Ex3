@@ -26,7 +26,7 @@
             android:ems="10"
             android:hint="IP:"
             android:inputType="textPersonName"
-            android:text="@{viewModel.ip}" />
+            android:text="@={viewModel.ip}" />
 
         <EditText
             android:id="@+id/etPort"
@@ -35,7 +35,7 @@
             android:ems="10"
             android:hint="Port:"
             android:inputType="textPersonName"
-            android:text="@{viewModel.port}"/>
+            android:text="@={viewModel.port}"/>
 
         <Button
             android:id="@+id/bConnect"
@@ -56,7 +56,7 @@
                 android:translationX="-200dp"
                 android:translationY="250dp"
                 tools:layout_editor_absoluteY="546dp"
-                android:progress="@{viewModel.throttle}"/>
+                android:progress="@={viewModel.throttle}"/>
 
             <com.example.ap2_ex3.views.Joystick
                 android:id="@+id/joystick"
@@ -74,7 +74,7 @@
                 android:layout_marginLeft="70dp"
                 android:layout_marginEnd="25dp"
                 android:layout_marginRight="25dp"
-                android:progress="@{viewModel.rudder}"
+                android:progress="@={viewModel.rudder}"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
